@@ -212,6 +212,7 @@ static CK_RV get_attrs_from_pkeyinfo(P11PROV_OBJ *key, CK_ATTRIBUTE *attrs,
         }
         break;
     case CKK_ML_DSA:
+    case CKK_SLH_DSA:
     case CKK_ML_KEM:
         pubattrs[0].type = CKA_VALUE;
         rv = p11prov_pkeyinfo_to_pubkey(pkeyinfo, &pubattrs[0]);
@@ -717,6 +718,7 @@ int p11prov_obj_export_public_key(P11PROV_OBJ *obj, OSSL_CALLBACK *cb_fn,
     case CKK_EC_MONTGOMERY:
         return p11prov_obj_export_public_ec_key(obj, cb_fn, cb_arg);
     case CKK_ML_DSA:
+    case CKK_SLH_DSA:
     case CKK_ML_KEM:
         return p11prov_obj_export_public_ml_key(obj, cb_fn, cb_arg);
     default:

@@ -871,7 +871,8 @@ static CK_RV alg_set_op(OSSL_ALGORITHM **op, int idx, OSSL_ALGORITHM *alg)
         CKM_ECDSA_SHA3_256, CKM_ECDSA_SHA3_384, CKM_ECDSA_SHA3_512
 
 #define PQC_MECHS \
-    CKM_ML_DSA, CKM_ML_DSA_KEY_PAIR_GEN, CKM_ML_KEM, CKM_ML_KEM_KEY_PAIR_GEN
+    CKM_ML_DSA, CKM_ML_DSA_KEY_PAIR_GEN, CKM_ML_KEM, CKM_ML_KEM_KEY_PAIR_GEN, \
+        CKM_SLH_DSA, CKM_SLH_DSA_KEY_PAIR_GEN
 
 #if SKEY_SUPPORT == 1
 #define AES_MECHS \
@@ -1247,6 +1248,34 @@ static CK_RV operations_init(P11PROV_CTX *ctx)
                              p11prov_mldsa_87_signature_functions);
                 UNCHECK_MECHS(CKM_ML_DSA_KEY_PAIR_GEN, CKM_ML_DSA);
                 break;
+            case CKM_SLH_DSA:
+            case CKM_SLH_DSA_KEY_PAIR_GEN:
+                ADD_ALGO_EXT(SLH_DSA_SHA2_128S, signature, prop,
+                             p11prov_slhdsa_sha2128s_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHAKE_128S, signature, prop,
+                             p11prov_slhdsa_shake128s_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHA2_128F, signature, prop,
+                             p11prov_slhdsa_sha2128f_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHAKE_128F, signature, prop,
+                             p11prov_slhdsa_shake128f_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHA2_192S, signature, prop,
+                             p11prov_slhdsa_sha2192s_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHAKE_192S, signature, prop,
+                             p11prov_slhdsa_shake192s_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHA2_192F, signature, prop,
+                             p11prov_slhdsa_sha2192f_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHAKE_192F, signature, prop,
+                             p11prov_slhdsa_shake192f_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHA2_256S, signature, prop,
+                             p11prov_slhdsa_sha2256s_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHAKE_256S , signature, prop,
+                             p11prov_slhdsa_shake256s_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHA2_256F, signature, prop,
+                             p11prov_slhdsa_sha2256f_signature_functions);
+                ADD_ALGO_EXT(SLH_DSA_SHAKE_256F, signature, prop,
+                             p11prov_slhdsa_shake256f_signature_functions);
+                UNCHECK_MECHS(CKM_SLH_DSA_KEY_PAIR_GEN, CKM_SLH_DSA);
+                break;
             case CKM_ML_KEM:
             case CKM_ML_KEM_KEY_PAIR_GEN:
                 ADD_ALGO_EXT(ML_KEM_512, kem, prop,
@@ -1433,6 +1462,66 @@ static CK_RV static_operations_init(P11PROV_CTX *ctx)
     ADD_ALGO_EXT(ML_DSA_87, encoder,
                  DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
                  p11prov_mldsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_128S, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_128S, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_128S, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_128S, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_128F, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_128F, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_128F, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_128F, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_192S, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_192S, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_192S, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_192S, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_192F, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_192F, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_192F, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_192F, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_256S, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_256S, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_256S , encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_256S , encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_256F, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_256F, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_256F, encoder, DEFAULT_PROPERTY(",output=text"),
+                 p11prov_slhdsa_encoder_text_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_256F, encoder,
+                 DEFAULT_PROPERTY(",output=der,structure=SubjectPublicKeyInfo"),
+                 p11prov_slhdsa_encoder_spki_der_functions);
     ADD_ALGO_EXT(ML_KEM_512, encoder, DEFAULT_PROPERTY(",output=text"),
                  p11prov_mlkem_encoder_text_functions);
     ADD_ALGO_EXT(ML_KEM_512, encoder,
@@ -1479,6 +1568,42 @@ static CK_RV static_operations_init(P11PROV_CTX *ctx)
         ADD_ALGO_EXT(ML_DSA_87, encoder,
                      DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
                      p11prov_mldsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHA2_128S, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHAKE_128S, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHA2_128F, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHAKE_128F, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHA2_192S, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHAKE_192S, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHA2_192F, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHAKE_192F, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHA2_256S, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHAKE_256S , encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHA2_256F, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
+        ADD_ALGO_EXT(SLH_DSA_SHAKE_256F, encoder,
+                     DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
+                     p11prov_slhdsa_encoder_priv_key_info_pem_functions);
         ADD_ALGO_EXT(ML_KEM_512, encoder,
                      DEFAULT_PROPERTY(",output=pem,structure=PrivateKeyInfo"),
                      p11prov_mlkem_encoder_priv_key_info_pem_functions);
@@ -1529,10 +1654,21 @@ static CK_RV static_operations_init(P11PROV_CTX *ctx)
     ADD_ALGO_EXT(ML_DSA_44, keymgmt, prop, p11prov_mldsa44_keymgmt_functions);
     ADD_ALGO_EXT(ML_DSA_65, keymgmt, prop, p11prov_mldsa65_keymgmt_functions);
     ADD_ALGO_EXT(ML_DSA_87, keymgmt, prop, p11prov_mldsa87_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_128S, keymgmt, prop, p11prov_slhdsasha2128s_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_128S, keymgmt, prop, p11prov_slhdsashake128s_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_128F, keymgmt, prop, p11prov_slhdsasha2128f_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_128F, keymgmt, prop, p11prov_slhdsashake128f_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_192S, keymgmt, prop, p11prov_slhdsasha2192s_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_192S, keymgmt, prop, p11prov_slhdsashake192s_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_192F, keymgmt, prop, p11prov_slhdsasha2192f_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_192F, keymgmt, prop, p11prov_slhdsashake192f_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_256S, keymgmt, prop, p11prov_slhdsasha2256s_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_256S , keymgmt, prop, p11prov_slhdsashake256s_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHA2_256F, keymgmt, prop, p11prov_slhdsasha2256f_keymgmt_functions);
+    ADD_ALGO_EXT(SLH_DSA_SHAKE_256F, keymgmt, prop, p11prov_slhdsashake256f_keymgmt_functions);
     ADD_ALGO_EXT(ML_KEM_512, keymgmt, prop, p11prov_mlkem512_keymgmt_functions);
     ADD_ALGO_EXT(ML_KEM_768, keymgmt, prop, p11prov_mlkem768_keymgmt_functions);
-    ADD_ALGO_EXT(ML_KEM_1024, keymgmt, prop,
-                 p11prov_mlkem1024_keymgmt_functions);
+    ADD_ALGO_EXT(ML_KEM_1024, keymgmt, prop, p11prov_mlkem1024_keymgmt_functions);
     TERM_ALGO(keymgmt);
 
 #if SKEY_SUPPORT == 1

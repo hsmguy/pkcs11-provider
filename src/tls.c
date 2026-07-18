@@ -242,6 +242,134 @@ int mldsa87_max_tls = 0;
 int mldsa87_min_dtls = -1;
 int mldsa87_max_dtls = -1;
 
+#endif
+
+#ifdef OSSL_PKEY_PARAM_SLH_DSA_SEED
+
+#define slhdsasha2128s_iana_name "slhdsasha2128s"
+#define slhdsasha2128s_name "SLH-DSA-SHA2-128s"
+#define slhdsasha2128s_oid "2.16.840.1.101.3.4.3.20"
+unsigned int slhdsasha2128s_code_point = 0x0911;
+unsigned int slhdsasha2128s_sec_bits = 128;
+int slhdsasha2128s_min_tls = TLS1_3_VERSION;
+int slhdsasha2128s_max_tls = 0;
+int slhdsasha2128s_min_dtls = -1;
+int slhdsasha2128s_max_dtls = -1;
+
+#define slhdsasha2128f_iana_name "slhdsasha2128f"
+#define slhdsasha2128f_name "SLH-DSA-SHA2-128f"
+#define slhdsasha2128f_oid "2.16.840.1.101.3.4.3.21"
+unsigned int slhdsasha2128f_code_point = 0x0912;
+unsigned int slhdsasha2128f_sec_bits = 128;
+int slhdsasha2128f_min_tls = TLS1_3_VERSION;
+int slhdsasha2128f_max_tls = 0;
+int slhdsasha2128f_min_dtls = -1;
+int slhdsasha2128f_max_dtls = -1;
+
+#define slhdsasha2192s_iana_name "slhdsasha2192s"
+#define slhdsasha2192s_name "SLH-DSA-SHA2-192s"
+#define slhdsasha2192s_oid "2.16.840.1.101.3.4.3.22"
+unsigned int slhdsasha2192s_code_point = 0x0913;
+unsigned int slhdsasha2192s_sec_bits = 192;
+int slhdsasha2192s_min_tls = TLS1_3_VERSION;
+int slhdsasha2192s_max_tls = 0;
+int slhdsasha2192s_min_dtls = -1;
+int slhdsasha2192s_max_dtls = -1;
+
+#define slhdsasha2192f_iana_name "slhdsasha2192f"
+#define slhdsasha2192f_name "SLH-DSA-SHA2-192f"
+#define slhdsasha2192f_oid "2.16.840.1.101.3.4.3.23"
+unsigned int slhdsasha2192f_code_point = 0x0914;
+unsigned int slhdsasha2192f_sec_bits = 192;
+int slhdsasha2192f_min_tls = TLS1_3_VERSION;
+int slhdsasha2192f_max_tls = 0;
+int slhdsasha2192f_min_dtls = -1;
+int slhdsasha2192f_max_dtls = -1;
+
+#define slhdsasha2256s_iana_name "slhdsasha2256s"
+#define slhdsasha2256s_name "SLH-DSA-SHA2-256s"
+#define slhdsasha2256s_oid "2.16.840.1.101.3.4.3.24"
+unsigned int slhdsasha2256s_code_point = 0x0915;
+unsigned int slhdsasha2256s_sec_bits = 256;
+int slhdsasha2256s_min_tls = TLS1_3_VERSION;
+int slhdsasha2256s_max_tls = 0;
+int slhdsasha2256s_min_dtls = -1;
+int slhdsasha2256s_max_dtls = -1;
+
+#define slhdsasha2256f_iana_name "slhdsasha2256f"
+#define slhdsasha2256f_name "SLH-DSA-SHA2-256f"
+#define slhdsasha2256f_oid "2.16.840.1.101.3.4.3.25"
+unsigned int slhdsasha2256f_code_point = 0x0916;
+unsigned int slhdsasha2256f_sec_bits = 256;
+int slhdsasha2256f_min_tls = TLS1_3_VERSION;
+int slhdsasha2256f_max_tls = 0;
+int slhdsasha2256f_min_dtls = -1;
+int slhdsasha2256f_max_dtls = -1;
+
+#define slhdsashake128s_iana_name "slhdsashake128s"
+#define slhdsashake128s_name "SLH-DSA-SHAKE-128s"
+#define slhdsashake128s_oid "2.16.840.1.101.3.4.3.26"
+unsigned int slhdsashake128s_code_point = 0x0917;
+unsigned int slhdsashake128s_sec_bits = 128;
+int slhdsashake128s_min_tls = TLS1_3_VERSION;
+int slhdsashake128s_max_tls = 0;
+int slhdsashake128s_min_dtls = -1;
+int slhdsashake128s_max_dtls = -1;
+
+#define slhdsashake128f_iana_name "slhdsashake128f"
+#define slhdsashake128f_name "SLH-DSA-SHAKE-128f"
+#define slhdsashake128f_oid "2.16.840.1.101.3.4.3.27"
+unsigned int slhdsashake128f_code_point = 0x0918;
+unsigned int slhdsashake128f_sec_bits = 128;
+int slhdsashake128f_min_tls = TLS1_3_VERSION;
+int slhdsashake128f_max_tls = 0;
+int slhdsashake128f_min_dtls = -1;
+int slhdsashake128f_max_dtls = -1;
+
+#define slhdsashake192s_iana_name "slhdsashake192s"
+#define slhdsashake192s_name "SLH-DSA-SHAKE-192s"
+#define slhdsashake192s_oid "2.16.840.1.101.3.4.3.28"
+unsigned int slhdsashake192s_code_point = 0x0919;
+unsigned int slhdsashake192s_sec_bits = 192;
+int slhdsashake192s_min_tls = TLS1_3_VERSION;
+int slhdsashake192s_max_tls = 0;
+int slhdsashake192s_min_dtls = -1;
+int slhdsashake192s_max_dtls = -1;
+
+#define slhdsashake192f_iana_name "slhdsashake192f"
+#define slhdsashake192f_name "SLH-DSA-SHAKE-192f"
+#define slhdsashake192f_oid "2.16.840.1.101.3.4.3.29"
+unsigned int slhdsashake192f_code_point = 0x091A;
+unsigned int slhdsashake192f_sec_bits = 192;
+int slhdsashake192f_min_tls = TLS1_3_VERSION;
+int slhdsashake192f_max_tls = 0;
+int slhdsashake192f_min_dtls = -1;
+int slhdsashake192f_max_dtls = -1;
+
+#define slhdsashake256s_iana_name "slhdsashake256s"
+#define slhdsashake256s_name "SLH-DSA-SHAKE-256s"
+#define slhdsashake256s_oid "2.16.840.1.101.3.4.3.30"
+unsigned int slhdsashake256s_code_point = 0x091B;
+unsigned int slhdsashake256s_sec_bits = 256;
+int slhdsashake256s_min_tls = TLS1_3_VERSION;
+int slhdsashake256s_max_tls = 0;
+int slhdsashake256s_min_dtls = -1;
+int slhdsashake256s_max_dtls = -1;
+
+#define slhdsashake256f_iana_name "slhdsashake256f"
+#define slhdsashake256f_name "SLH-DSA-SHAKE-256f"
+#define slhdsashake256f_oid "2.16.840.1.101.3.4.3.31"
+unsigned int slhdsashake256f_code_point = 0x091C;
+unsigned int slhdsashake256f_sec_bits = 256;
+int slhdsashake256f_min_tls = TLS1_3_VERSION;
+int slhdsashake256f_max_tls = 0;
+int slhdsashake256f_min_dtls = -1;
+int slhdsashake256f_max_dtls = -1;
+
+#endif
+
+#if defined(OSSL_PKEY_PARAM_ML_DSA_SEED) || defined(OSSL_PKEY_PARAM_SLH_DSA_SEED)
+
 #define TLS_SIGALG_ENTRY(pre) \
     { OSSL_PARAM_utf8_string(OSSL_CAPABILITY_TLS_SIGALG_IANA_NAME, \
                              (void *)pre##_iana_name, \
@@ -269,6 +397,20 @@ struct {
     { "mldsa44", TLS_SIGALG_ENTRY(mldsa44) },
     { "mldsa65", TLS_SIGALG_ENTRY(mldsa65) },
     { "mldsa87", TLS_SIGALG_ENTRY(mldsa87) },
+#endif
+#ifdef OSSL_PKEY_PARAM_SLH_DSA_SEED
+    { "slhdsasha2128s", TLS_SIGALG_ENTRY(slhdsasha2128s) },
+    { "slhdsashake128s", TLS_SIGALG_ENTRY(slhdsashake128s) },
+    { "slhdsasha2128f", TLS_SIGALG_ENTRY(slhdsasha2128f) },
+    { "slhdsashake128f", TLS_SIGALG_ENTRY(slhdsashake128f) },
+    { "slhdsasha2192s", TLS_SIGALG_ENTRY(slhdsasha2192s) },
+    { "slhdsashake192s", TLS_SIGALG_ENTRY(slhdsashake192s) },
+    { "slhdsasha2192f", TLS_SIGALG_ENTRY(slhdsasha2192f) },
+    { "slhdsashake192f", TLS_SIGALG_ENTRY(slhdsashake192f) },
+    { "slhdsasha2256s", TLS_SIGALG_ENTRY(slhdsasha2256s) },
+    { "slhdsashake256s", TLS_SIGALG_ENTRY(slhdsashake256s) },
+    { "slhdsasha2256f", TLS_SIGALG_ENTRY(slhdsasha2256f) },
+    { "slhdsashake256f", TLS_SIGALG_ENTRY(slhdsashake256f) },
 #endif
 };
 

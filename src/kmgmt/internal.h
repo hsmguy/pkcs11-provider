@@ -28,6 +28,9 @@ struct key_generator {
             CK_ML_DSA_PARAMETER_SET_TYPE param_set;
         } mldsa;
         struct {
+            CK_SLH_DSA_PARAMETER_SET_TYPE param_set;
+        } slhdsa;
+        struct {
             CK_ML_KEM_PARAMETER_SET_TYPE param_set;
         } mlkem;
     } data;

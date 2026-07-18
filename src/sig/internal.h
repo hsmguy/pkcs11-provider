@@ -42,6 +42,10 @@ struct p11prov_sig_ctx {
     CK_ML_DSA_PARAMETER_SET_TYPE mldsa_paramset;
     CK_SIGN_ADDITIONAL_CONTEXT mldsa_params;
 
+    /* SLH-DSA param data */
+    CK_SLH_DSA_PARAMETER_SET_TYPE slhdsa_paramset;
+    CK_SIGN_ADDITIONAL_CONTEXT slhdsa_params;
+
     /* Signature to be verified, used by verify_message_final() */
     unsigned char *signature;
     size_t signature_len;

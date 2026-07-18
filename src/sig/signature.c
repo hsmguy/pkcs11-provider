@@ -89,6 +89,13 @@ void *p11prov_sig_dupctx(void *ctx)
             sigctx->mldsa_params.pContext, sigctx->mldsa_params.ulContextLen);
     }
 
+    newctx->slhdsa_paramset = sigctx->slhdsa_paramset;
+    newctx->slhdsa_params = sigctx->slhdsa_params;
+    if (sigctx->slhdsa_params.pContext) {
+        newctx->slhdsa_params.pContext = OPENSSL_memdup(
+            sigctx->slhdsa_params.pContext, sigctx->slhdsa_params.ulContextLen);
+    }
+
     if (sigctx->signature) {
         newctx->signature =
             OPENSSL_memdup(sigctx->signature, sigctx->signature_len);
@@ -236,6 +243,8 @@ void p11prov_sig_freectx(void *ctx)
 
     OPENSSL_clear_free(sigctx->mldsa_params.pContext,
                        sigctx->mldsa_params.ulContextLen);
+    OPENSSL_clear_free(sigctx->slhdsa_params.pContext,
+                       sigctx->slhdsa_params.ulContextLen);
     OPENSSL_clear_free(sigctx->eddsa_params.pContextData,
                        sigctx->eddsa_params.ulContextDataLen);
     OPENSSL_free(sigctx->signature);

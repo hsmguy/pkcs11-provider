@@ -543,6 +543,8 @@ static int p11prov_ecdsa_get_ctx_params(void *ctx, OSSL_PARAM *params)
 
     P11PROV_debug("ecdsa get ctx params (ctx=%p, params=%p)", ctx, params);
 
+
+
     p = OSSL_PARAM_locate(params, OSSL_SIGNATURE_PARAM_ALGORITHM_ID);
     if (p) {
         const struct ecdsa_data *data;

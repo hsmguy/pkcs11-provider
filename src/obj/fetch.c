@@ -67,6 +67,21 @@ const struct fetch_attrs ML_DSA_private_attrs[] = {
     { { CKA_ALWAYS_AUTHENTICATE, NULL, 0 }, true, false },
 };
 
+const struct fetch_attrs SLH_DSA_public_attrs[] = {
+    COMMON_KEYPAIR_ATTRIBUTES,
+    { { CKA_PARAMETER_SET, NULL, 0 }, true, true },
+    { { CKA_VALUE, NULL, 0 }, true, true },
+};
+
+const struct fetch_attrs SLH_DSA_private_attrs[] = {
+    COMMON_KEYPAIR_ATTRIBUTES,
+    { { CKA_PARAMETER_SET, NULL, 0 }, true, true },
+    { { CKA_ALWAYS_AUTHENTICATE, NULL, 0 }, true, false },
+};
+
+#define SLH_DSA_public_attrs SLH_DSA_public_attrs
+#define SLH_DSA_private_attrs SLH_DSA_private_attrs
+
 #define ML_KEM_public_attrs ML_DSA_public_attrs
 #define ML_KEM_private_attrs ML_DSA_private_attrs
 
@@ -117,6 +132,7 @@ const struct key_attrs {
     FILL_ATTRS(EC_MONTGOMERY, 1 + EXTRA_EC_PARAMS),
     FILL_ATTRS(ML_DSA, 1),
     FILL_ATTRS(ML_KEM, 1),
+    FILL_ATTRS(SLH_DSA, 1),
     FILL_KNOWN_SECRETS(1),
     { 0, 0, NULL, 0, 0 },
 };
@@ -216,6 +232,49 @@ static CK_RV fetch_key(P11PROV_CTX *ctx, P11PROV_SESSION *session,
             break;
         case CKP_ML_DSA_87:
             key->data.key.size = ML_DSA_87_PK_SIZE;
+            break;
+        default:
+            return CKR_KEY_INDIGESTIBLE;
+        }
+        key->data.key.bit_size = key->data.key.size * 8;
+        return CKR_OK;
+    case CKK_SLH_DSA:
+        switch (key->data.key.param_set) {
+        case CKP_SLH_DSA_SHA2_128S:
+            key->data.key.size = SLH_DSA_SHA2_128S_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHAKE_128S:
+            key->data.key.size = SLH_DSA_SHAKE_128S_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHA2_128F:
+            key->data.key.size = SLH_DSA_SHA2_128F_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHAKE_128F:
+            key->data.key.size = SLH_DSA_SHAKE_128F_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHA2_192S:
+            key->data.key.size = SLH_DSA_SHA2_192S_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHAKE_192S:
+            key->data.key.size = SLH_DSA_SHAKE_192S_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHA2_192F:
+            key->data.key.size = SLH_DSA_SHA2_192F_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHAKE_192F:
+            key->data.key.size = SLH_DSA_SHAKE_192F_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHA2_256S:
+            key->data.key.size = SLH_DSA_SHA2_256S_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHAKE_256S:
+            key->data.key.size = SLH_DSA_SHAKE_256S_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHA2_256F:
+            key->data.key.size = SLH_DSA_SHA2_256F_PK_SIZE;
+            break;
+        case CKP_SLH_DSA_SHAKE_256F:
+            key->data.key.size = SLH_DSA_SHAKE_256F_PK_SIZE;
             break;
         default:
             return CKR_KEY_INDIGESTIBLE;
