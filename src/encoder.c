@@ -538,6 +538,16 @@ static int p11prov_print_pkeyinfo(CK_ATTRIBUTE *pkeyinfo, BIO *out)
         ret = ASN1_buf_print(out, pk, pklen, 4);
     }
 #endif
+#ifdef NID_SLH_DSA_SHA2_128s
+    else if (nid == NID_SLH_DSA_SHA2_128s || nid == NID_SLH_DSA_SHAKE_128s ||nid == NID_SLH_DSA_SHA2_128f ||
+            nid == NID_SLH_DSA_SHAKE_128f ||nid == NID_SLH_DSA_SHA2_192s || nid == NID_SLH_DSA_SHAKE_192s || 
+            nid == NID_SLH_DSA_SHA2_192f || nid == NID_SLH_DSA_SHAKE_192f || nid == NID_SLH_DSA_SHA2_256s ||
+            nid == NID_SLH_DSA_SHAKE_256s || nid == NID_SLH_DSA_SHA2_256f || nid == NID_SLH_DSA_SHAKE_256f) { 
+        BIO_printf(out, "Pub:\n");
+        ret = ASN1_buf_print(out, pk, pklen, 4);
+    }
+#endif
+
 #ifdef NID_ML_KEM_512
     else if (nid == NID_ML_KEM_512 || nid == NID_ML_KEM_768
              || nid == NID_ML_KEM_1024) {
@@ -1439,7 +1449,7 @@ struct slhdsa_key_point {
     size_t len;
 };
 
-#ifdef NID_SLH_DSA_SHA2_128S
+#ifdef NID_SLH_DSA_SHA2_128s
 static int p11prov_slhdsa_set_keypoint_data(const OSSL_PARAM *params, void *key)
 {
     struct slhdsa_key_point *keypoint = (struct slhdsa_key_point *)key;
@@ -1465,46 +1475,46 @@ static int p11prov_slhdsa_set_keypoint_data(const OSSL_PARAM *params, void *key)
 int p11prov_slhdsa_pubkey_to_x509(X509_PUBKEY *pubkey, P11PROV_OBJ *key)
 {
     int ret = RET_OSSL_ERR;
-#ifdef NID_SLH_DSA_SHA2_128S
+#ifdef NID_SLH_DSA_SHA2_128s
     struct slhdsa_key_point keypoint = { 0 };
     int nid = NID_undef;
 
     switch (p11prov_obj_get_key_param_set(key)) {
     case CKP_SLH_DSA_SHA2_128S:
-        nid = NID_SLH_DSA_SHA2_128S;
+        nid = NID_SLH_DSA_SHA2_128s;
         break;
     case CKP_SLH_DSA_SHAKE_128S:
-        nid = NID_SLH_DSA_SHAKE_128S;   
+        nid = NID_SLH_DSA_SHAKE_128s;   
         break;
     case CKP_SLH_DSA_SHA2_128F:
-        nid = NID_SLH_DSA_SHA2_128F;       
+        nid = NID_SLH_DSA_SHA2_128f;       
         break;
     case CKP_SLH_DSA_SHAKE_128F:
-        nid = NID_SLH_DSA_SHAKE_128F;      
+        nid = NID_SLH_DSA_SHAKE_128f;      
         break;
     case CKP_SLH_DSA_SHA2_192S:
-        nid = NID_SLH_DSA_SHA2_192S;     
+        nid = NID_SLH_DSA_SHA2_192s;     
         break;
     case CKP_SLH_DSA_SHAKE_192S:
-        nid = NID_SLH_DSA_SHAKE_192S;        
+        nid = NID_SLH_DSA_SHAKE_192s;        
         break;
     case CKP_SLH_DSA_SHA2_192F:
-        nid = NID_SLH_DSA_SHA2_192F;      
+        nid = NID_SLH_DSA_SHA2_192f;      
         break;
     case CKP_SLH_DSA_SHAKE_192F:
-        nid = NID_SLH_DSA_SHAKE_192F;       
+        nid = NID_SLH_DSA_SHAKE_192f;       
         break;
     case CKP_SLH_DSA_SHA2_256S:
-        nid = NID_SLH_DSA_SHA2_256S;  
+        nid = NID_SLH_DSA_SHA2_256s;  
         break;
     case CKP_SLH_DSA_SHAKE_256S:
-        nid = NID_SLH_DSA_SHAKE_256S;       
+        nid = NID_SLH_DSA_SHAKE_256s;       
         break;
     case CKP_SLH_DSA_SHA2_256F:
-        nid = NID_SLH_DSA_SHA2_256F;        
+        nid = NID_SLH_DSA_SHA2_256f;        
         break;
     case CKP_SLH_DSA_SHAKE_256F:
-        nid = NID_SLH_DSA_SHAKE_256F;        
+        nid = NID_SLH_DSA_SHAKE_256f;        
         break;
     default:
         goto done;
