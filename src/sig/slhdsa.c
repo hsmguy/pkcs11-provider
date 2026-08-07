@@ -675,6 +675,8 @@ static const OSSL_PARAM *p11prov_slhdsa_settable_ctx_params(void *ctx,
         DISPATCH_SIG_ELEM(slhdsa, SIGN, sign), \
         DISPATCH_SIG_ELEM(slhdsa, VERIFY_INIT, verify_init), \
         DISPATCH_SIG_ELEM(slhdsa, VERIFY, verify), \
+        DISPATCH_SIG_ELEM(slhdsa, DIGEST_SIGN, sign), \
+        DISPATCH_SIG_ELEM(slhdsa, DIGEST_VERIFY, verify), \
         DISPATCH_SIG_ELEM(slhdsa, DIGEST_SIGN_INIT, digest_sign_init), \
         DISPATCH_SIG_ELEM(slhdsa, DIGEST_SIGN_UPDATE, digest_sign_update), \
         DISPATCH_SIG_ELEM(slhdsa, DIGEST_SIGN_FINAL, digest_sign_final), \
